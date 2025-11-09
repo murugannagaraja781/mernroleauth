@@ -1,0 +1,26 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with: node-version: 20
+      - name: Install & test server
+        run: |
+          cd server
+          npm ci
+          # add tests later
+  client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with: node-version: 20
+      - run: |
+          cd client
+          npm ci
+          npm run build
